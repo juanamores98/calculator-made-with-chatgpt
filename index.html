@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora Simple</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-200">
+    <nav class="bg-blue-500 p-4 text-white flex justify-between">
+      <h1 class="text-lg font-bold">Mi Calculadora</h1>
+      <button id="logout" onclick="logout()" class="hidden">
+        Cerrar Sesión
+      </button>
+    </nav>
+    <div id="login" class="flex items-center justify-center h-screen">
+      <div class="bg-white shadow-lg rounded-lg p-5">
+        <h2 class="text-lg font-bold mb-5">Iniciar Sesión</h2>
+        <input
+          type="text"
+          id="username"
+          placeholder="Usuario"
+          class="w-full p-3 border rounded-lg mb-5"
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Contraseña"
+          class="w-full p-3 border rounded-lg mb-5"
+        />
+        <button
+          onclick="login()"
+          class="bg-blue-500 text-white p-3 rounded-lg font-bold w-full"
+        >
+          Ingresar
+        </button>
+        <button
+          onclick="showRegister()"
+          class="bg-green-500 text-white p-3 rounded-lg font-bold w-full mt-5"
+        >
+          Registrarse
+        </button>
+      </div>
+    </div>
+    <div id="register" class="flex items-center justify-center h-screen hidden">
+      <div class="bg-white shadow-lg rounded-lg p-5">
+        <h2 class="text-lg font-bold mb-5">Registrarse</h2>
+        <input
+          type="text"
+          id="registerUsername"
+          placeholder="Usuario"
+          class="w-full p-3 border rounded-lg mb-5"
+        />
+        <input
+          type="password"
+          id="registerPassword"
+          placeholder="Contraseña"
+          class="w-full p-3 border rounded-lg mb-5"
+        />
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirmar Contraseña"
+          class="w-full p-3 border rounded-lg mb-5"
+        />
+        <button
+          onclick="register()"
+          class="bg-blue-500 text-white p-3 rounded-lg font-bold w-full"
+        >
+          Crear Cuenta
+        </button>
+        <button
+          onclick="showLogin()"
+          class="bg-green-500 text-white p-3 rounded-lg font-bold w-full mt-5"
+        >
+          Volver a Iniciar Sesión
+        </button>
+      </div>
+    </div>
+    <div
+      id="calculator"
+      class="flex items-center justify-center h-screen hidden"
+    >
+      <div class="flex">
+        <div class="bg-white shadow-lg rounded-lg p-5 mr-5">
+          <input
+            type="text"
+            id="result"
+            class="w-full p-3 text-right text-lg font-bold border rounded-lg mb-5"
+            disabled
+          />
+          <div class="grid grid-cols-4 gap-5">
+            <button
+              onclick="clearResult()"
+              class="bg-red-500 text-white p-3 rounded-lg font-bold"
+            >
+              C
+            </button>
+            <button
+              onclick="appendNumber('7')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              7
+            </button>
+            <button
+              onclick="appendNumber('8')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              8
+            </button>
+            <button
+              onclick="appendNumber('9')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              9
+            </button>
+            <button
+              onclick="appendOperator('/')"
+              class="bg-blue-500 text-white p-3 rounded-lg font-bold"
+            >
+              /
+            </button>
+            <button
+              onclick="appendNumber('4')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              4
+            </button>
+            <button
+              onclick="appendNumber('5')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              5
+            </button>
+            <button
+              onclick="appendNumber('6')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              6
+            </button>
+            <button
+              onclick="appendOperator('*')"
+              class="bg-blue-500 text-white p-3 rounded-lg font-bold"
+            >
+              *
+            </button>
+            <button
+              onclick="appendNumber('1')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              1
+            </button>
+            <button
+              onclick="appendNumber('2')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              2
+            </button>
+            <button
+              onclick="appendNumber('3')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              3
+            </button>
+            <button
+              onclick="appendOperator('-')"
+              class="bg-blue-500 text-white p-3 rounded-lg font-bold"
+            >
+              -
+            </button>
+            <button
+              onclick="appendNumber('0')"
+              class="bg-gray-300 p-3 rounded-lg font-bold"
+            >
+              0
+            </button>
+            <button
+              onclick="calculateResult()"
+              class="col-span-2 bg-green-500 text-white p-3 rounded-lg font-bold"
+            >
+              =
+            </button>
+            <button
+              onclick="appendOperator('+')"
+              class="bg-blue-500 text-white p-3 rounded-lg font-bold"
+            >
+              +
+            </button>
+            <button
+              onclick="appendOperator('%')"
+              class="bg-blue-500 text-white p-3 rounded-lg font-bold"
+            >
+              %
+            </button>
+            <button
+              onclick="calculateSquareRoot()"
+              class="bg-blue-500 text-white p-3 rounded-lg font-bold"
+            >
+              √
+            </button>
+          </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-5">
+          <h2 class="text-lg font-bold mb-5">Historial de Operaciones</h2>
+          <ul id="history" class="text-right"></ul>
+          <button
+            onclick="clearHistory()"
+            class="bg-red-500 text-white p-3 rounded-lg font-bold mt-5"
+          >
+            Borrar Historial
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var loginSection = document.getElementById('login');
+    var registerSection = document.getElementById('register');
+    var calculatorSection = document.getElementById('calculator');
+    var logoutButton = document.getElementById('logout');
+    function showRegister() {
+      loginSection.classList.add('hidden');
+      registerSection.classList.remove('hidden');
+    }
+    function showLogin() {
+      registerSection.classList.add('hidden');
+      loginSection.classList.remove('hidden');
+    }
+    function login() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var storedPassword = localStorage.getItem(username);
+      if (password === storedPassword) {
+        loginSection.classList.add('hidden');
+        calculatorSection.classList.remove('hidden');
+        logoutButton.classList.remove('hidden');
+      } else {
+        alert('Usuario o contraseña incorrectos');
+      }
+    }
+    function register() {
+      var username = document.getElementById('registerUsername').value;
+      var password = document.getElementById('registerPassword').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+      if (password === confirmPassword) {
+        localStorage.setItem(username, password);
+        alert('Usuario registrado con éxito');
+        showLogin();
+      } else {
+        alert('Las contraseñas no coinciden');
+      }
+    }
+    function logout() {
+      loginSection.classList.remove('hidden');
+      calculatorSection.classList.add('hidden');
+      logoutButton.classList.add('hidden');
+    }
+    var resultField = document.getElementById('result');
+    var historyField = document.getElementById('history');
+    function appendNumber(number) {
+      resultField.value = resultField.value + number;
+    }
+    function appendOperator(operator) {
+      resultField.value = resultField.value + operator;
+    }
+    function clearResult() {
+      resultField.value = '';
+    }
+    function calculateResult() {
+      try {
+        let result = eval(resultField.value);
+        historyField.innerHTML +=
+          '<li>' + resultField.value + ' = ' + result + '</li>';
+        resultField.value = result;
+      } catch {
+        resultField.value = 'Error';
+      }
+    }
+    function calculateSquareRoot() {
+      try {
+        let result = Math.sqrt(resultField.value);
+        historyField.innerHTML +=
+          '<li>√' + resultField.value + ' = ' + result + '</li>';
+        resultField.value = result;
+      } catch {
+        resultField.value = 'Error';
+      }
+    }
+    function clearHistory() {
+      historyField.innerHTML = '';
+    }
+  </script>
+</html>
